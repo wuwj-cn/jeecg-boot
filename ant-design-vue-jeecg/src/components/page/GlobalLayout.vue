@@ -343,7 +343,7 @@
           }
 
           .anticon {
-            color: white;
+            color: inherit;
           }
         }
       }
@@ -359,7 +359,7 @@
             }
 
             .anticon {
-              color: black;
+              color: inherit;
             }
           }
         }

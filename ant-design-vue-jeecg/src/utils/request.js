@@ -33,11 +33,8 @@ const err = (error) => {
         break
       case 500:
         //notification.error({ message: '系统提示', description:'Token失效，请重新登录!',duration: 4})
-        if(token && data.message=="Token失效，请重新登录"){
+        if(token && data.message.includes("Token失效")){
           // update-begin- --- author:scott ------ date:20190225 ---- for:Token失效采用弹框模式，不直接跳转----
-          // store.dispatch('Logout').then(() => {
-          //     window.location.reload()
-          // })
           Modal.error({
             title: '登录已过期',
             content: '很抱歉，登录已过期，请重新登录',
@@ -47,8 +44,9 @@ const err = (error) => {
               store.dispatch('Logout').then(() => {
                 Vue.ls.remove(ACCESS_TOKEN)
                 try {
-                  let path=that.$route.path;
-                  if(path.indexOf('/user/login')==-1){
+                  let path = window.document.location.pathname
+                  console.log("location pathname -> "+path)
+                  if(path!="/" && path.indexOf('/user/login')==-1){
                     window.location.reload()
                   }
                 }catch (e) {
